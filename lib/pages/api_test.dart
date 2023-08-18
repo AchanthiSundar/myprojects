@@ -78,9 +78,9 @@ class _DashboardState extends State<Dashboard> {
           convert.jsonDecode(response.body) as Map<String, dynamic>;
       var itemCount = jsonResponse['totalItems'];
       print('Request with json response:$jsonResponse');
-      showAlertDialog(context, 'Number of books about http: $itemCount.');
+      showCupertinoAlertDialog(context, 'Number of books about http: $itemCount.');
     } else {
-      showAlertDialog(context, 'Request failed with status: ${response.statusCode}.');
+      showCupertinoAlertDialog(context, 'Request failed with status: ${response.statusCode}.');
       print('Request failed with status: ${response.statusCode}.');
     }
   }

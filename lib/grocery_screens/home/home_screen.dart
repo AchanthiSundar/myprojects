@@ -1,17 +1,20 @@
 import 'dart:math';
-import '../../widgets/grocery_widgets/explore_items_widgets.dart';
-import '../../widgets/grocery_widgets/explore_new_categories.dart';
-import '../../widgets/grocery_widgets/explore_small_items_widget.dart';
-import '../../widgets/grocery_widgets/image_carousel_bottom_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+
 import '../../model/category_item.dart';
 import '../../model/grocery_item.dart';
+import '../../utils/custom_function.dart';
+import '../../widgets/grocery_widgets/explore_items_widgets.dart';
+import '../../widgets/grocery_widgets/explore_new_categories.dart';
+import '../../widgets/grocery_widgets/explore_small_items_widget.dart';
 import '../../widgets/grocery_widgets/grocery_banner_widget.dart';
 import '../../widgets/grocery_widgets/grocery_item_card_widget.dart';
+import '../../widgets/grocery_widgets/image_carousel_bottom_widget.dart';
 import '../../widgets/grocery_widgets/image_carousel_widget.dart';
 import '../../widgets/grocery_widgets/search_bar_widget.dart';
 
@@ -44,7 +47,7 @@ class HomeScreen extends StatelessWidget {
             elevation: 0,
             backgroundColor: HexColor("#49067f"),
             title: addressWidget(),
-            actions: [actionsIconWidget()],
+            actions: [actionsIconWidget(context)],
             bottom: SearchBarWidget(context),
           ),
           SliverList(
@@ -162,7 +165,7 @@ class HomeScreen extends StatelessWidget {
     ]);
   }
 
-  Widget actionsIconWidget() {
+  Widget actionsIconWidget(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 15),
       child: Row(children: [
@@ -173,10 +176,20 @@ class HomeScreen extends StatelessWidget {
           height: 17,
         ),
         const SizedBox(
-          width: 16,
+          width: 5,
         ),
-        SvgPicture.asset("asset/icons/account_icon.svg",
-            color: Colors.white, width: 13, height: 17),
+        IconButton(
+          icon: const Icon(
+            Icons.account_circle,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            showCupertinoAlertLogoutDialog(context,'Are you sure you want to log out?');
+          },
+        ),
+        // SvgPicture.asset("asset/icons/account_icon.svg",
+        //     color: Colors.white, width: 13, height: 17,
+        // ),
       ]),
     );
   }
@@ -265,7 +278,7 @@ class HomeScreen extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 15),
       height: 235,
       child: ListView.separated(
-        padding: const EdgeInsets.only(left:145,right:13),
+        padding: const EdgeInsets.only(left: 145, right: 13),
         itemCount: items.length,
         scrollDirection: Axis.horizontal,
         physics: const AlwaysScrollableScrollPhysics(),

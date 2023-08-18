@@ -97,10 +97,10 @@ class _DashboardState extends State<_Dashboard> {
                         hideKeyboard();
                         print(contactListModel[0].name);
                       } else {
-                        showAlertDialog(context, "Enter The Valid Mobile No");
+                        showCupertinoAlertDialog(context, "Enter The Valid Mobile No");
                       }
                     } else {
-                      showAlertDialog(context, "Enter The Name");
+                      showCupertinoAlertDialog(context, "Enter The Name");
                     }
                   });
                 },
